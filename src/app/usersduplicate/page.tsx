@@ -6,17 +6,26 @@ type User = {
 };
 
 async function getUsers(): Promise<User[]> {
-    const response = await fetch('https://jsonplaceholder.typicode.com/users');
-    console.log('Response:', response);
-    if (!response.ok) {
-        throw new Error('Failed to fetch users');
+    try {
+        const response = await fetch('https://jsonplaceholder.typicode.com/users/99999');
+        console.log('Response:', response);
+        // i can look at the response object to see the data
+        if (!response.ok) {
+            throw new Error('Failed to fetch users');
+        }
+        console.log("ok:", response.ok);
+        // i can look at the response.ok to see if the request was successful
+        const data = await response.json();
+        console.log("data:", data);
+        // i can look at the data to see the data
+
+        return data;
+    } catch (error) {
+        console.log("ERROR:", error);
     }
-    const data = await response.json();
-    return data;
-    console.log("response:", response);
-    console.log("ok:", response.ok);
-    console.log("status:", response.status);
-    console.log("statusText:", response.statusText);
+    return [];
+
+
 }
 
 export default async function UsersPage() {
