@@ -13,6 +13,10 @@ async function getUsers(): Promise<User[]> {
     }
     const data = await response.json();
     return data;
+    console.log("response:", response);
+    console.log("ok:", response.ok);
+    console.log("status:", response.status);
+    console.log("statusText:", response.statusText);
 }
 
 export default async function UsersPage() {
