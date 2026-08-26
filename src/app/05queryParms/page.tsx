@@ -5,7 +5,18 @@ type PageProps = {
     }>;
 };
 
-async function getUsers(page: string, limit: string) {
+type users = {
+    id: number;
+    name: string;
+    title: string;
+    body: string;
+    userId: number;
+}
+
+async function getUsers
+    (page: string,
+        limit: string
+    ): Promise<users[]> {
     const response = await fetch(
         `https://jsonplaceholder.typicode.com/users?_page=${page}&_limit=${limit}`
     );
@@ -27,8 +38,10 @@ export default async function Page({ searchParams }: PageProps) {
             <p>Page: {page}</p>
             <p>Limit: {limit}</p>
 
-            {users.map((user: any) => (
-                <p key={user.id}>{user.name}</p>
+            {users.map((user) => (
+                <div key={user.id}>
+                    <p>{user.name}</p>
+                </div>
             ))}
         </div>
     );
